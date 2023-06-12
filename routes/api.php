@@ -13,6 +13,8 @@ use App\Http\Controllers\PolicyPageController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CountryCityController;
+use App\Http\Controllers\MissionApplicationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,3 +49,7 @@ Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy']);
 Route::get('/fetch-countries', [CountryCityController::class, 'fetchCountries']);
 Route::post('/fetch-city', [CountryCityController::class, 'fetchCities']);
 Route::post('/admin/user', [AdminUserController::class, 'store']);
+
+Route::get('/admin/mission-applications', [MissionApplicationController::class, 'getMissionApplications']);
+Route::get('/admin/approve-application', [MissionApplicationController::class, 'approveApplication']);
+Route::get('/admin/reject-application', [MissionApplicationController::class, 'rejectApplication']);

@@ -64,6 +64,7 @@ import PrivacyPolicy from './components/PrivacyPolicy.vue';
 import AdminUserForm from './components/AdminUserForm.vue';
 import AdminUserCreate from './components/AdminUserCreate.vue';
 import AdminUserEdit from './components/AdminUserEdit.vue';
+import MissionApplicationIndex from './components/MissionApplicationIndex.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -94,6 +95,7 @@ const router = createRouter({
         { path: '/admin/user', component: AdminUserForm },
         {path:'/admin/user/create',component:AdminUserCreate },
         {path:'/admin/user/edit',component:AdminUserEdit},
+        {path:'/admin/mission-application',component:MissionApplicationIndex},
     ]
 });
 const app = createApp(App);
