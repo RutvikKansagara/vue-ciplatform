@@ -63,7 +63,7 @@ import AdminResetPassword from './components/AdminResetPassword.vue';
 import PrivacyPolicy from './components/PrivacyPolicy.vue';
 import AdminUserForm from './components/AdminUserForm.vue';
 import AdminUserCreate from './components/AdminUserCreate.vue';
-
+import AdminUserEdit from './components/AdminUserEdit.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -93,6 +93,7 @@ const router = createRouter({
         { path: '/policies', component: PrivacyPolicy },
         { path: '/admin/user', component: AdminUserForm },
         {path:'/admin/user/create',component:AdminUserCreate },
+        {path:'/admin/user/edit',component:AdminUserEdit},
     ]
 });
 const app = createApp(App);
