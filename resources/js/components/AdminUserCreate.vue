@@ -296,7 +296,7 @@ export default {
       selectedCountryId: null,
       selectedCityId: null,
 
-      countries: [],
+      countries: [],    
       cityDropdowns: [],
       errors: {},
       successMessage:''

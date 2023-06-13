@@ -14,7 +14,7 @@ use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CountryCityController;
 use App\Http\Controllers\MissionApplicationController;
-
+use App\Http\Controllers\AdminStoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,3 +53,9 @@ Route::post('/admin/user', [AdminUserController::class, 'store']);
 Route::get('/admin/mission-applications', [MissionApplicationController::class, 'getMissionApplications']);
 Route::get('/admin/approve-application', [MissionApplicationController::class, 'approveApplication']);
 Route::get('/admin/reject-application', [MissionApplicationController::class, 'rejectApplication']);
+
+Route::get('/admin/stories', [AdminStoryController::class, 'index'])->name('stories.index');
+Route::get('/admin/stories/{id}', [AdminStoryController::class, 'show'])->name('stories.show');
+Route::post('/admin/stories/{id}/publish', [AdminStoryController::class, 'publish'])->name('stories.publish');
+Route::post('/admin/stories/{id}/decline', [AdminStoryController::class, 'decline'])->name('stories.decline');
+Route::delete('/admin/stories/{id}', [AdminStoryController::class, 'destroy'])->name('stories.destroy');

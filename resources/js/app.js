@@ -65,6 +65,8 @@ import AdminUserForm from './components/AdminUserForm.vue';
 import AdminUserCreate from './components/AdminUserCreate.vue';
 import AdminUserEdit from './components/AdminUserEdit.vue';
 import MissionApplicationIndex from './components/MissionApplicationIndex.vue';
+import AdminStoryIndex from './components/AdminStoryIndex.vue';
+import AdminShowStory from './components/AdminShowStory.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -96,8 +98,11 @@ const router = createRouter({
         {path:'/admin/user/create',component:AdminUserCreate },
         {path:'/admin/user/edit',component:AdminUserEdit},
         {path:'/admin/mission-application',component:MissionApplicationIndex},
+        {path:'/admin/story',component:AdminStoryIndex},
+        {path:'/admin/story/:id/show',component:AdminShowStory},
     ]
 });
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
+

@@ -373,7 +373,7 @@
           // Handle error
         });
 
-      // Fetch cities on component mount if a country is already selected
+      
       if (this.selectedCountryId) {
         this.fetchCities(this.selectedCountryId);
       }
