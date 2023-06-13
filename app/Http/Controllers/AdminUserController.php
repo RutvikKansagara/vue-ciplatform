@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,29 @@ class AdminUserController extends Controller
 
         return response()->json(['message' => 'New User has been created'], 200);
     }
+
+    public function update(UpdateUserRequest $request, $id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+
+    $password = $request->input('password');
+
+    if ($password) {
+        $user->password = bcrypt($password);
+    }
+
+    $user->fill($request->except(['password']));
+
+    $user->save();
+
+    return response()->json(['message' => 'User updated successfully']);
+}
+
+
 
     public function destroy(User $user)
     {

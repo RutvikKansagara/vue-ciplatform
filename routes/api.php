@@ -50,7 +50,7 @@ Route::get('/fetch-countries', [CountryCityController::class, 'fetchCountries'])
 Route::post('/fetch-city', [CountryCityController::class, 'fetchCities']);
 Route::post('/admin/user', [AdminUserController::class, 'store']);
 Route::get('admin/user/{user}',[AdminUserController::class,'show']);
-
+Route::put('admin/user/{user}',[AdminUserController::class,'update']);
 Route::get('/admin/mission-applications', [MissionApplicationController::class, 'getMissionApplications']);
 Route::get('/admin/approve-application', [MissionApplicationController::class, 'approveApplication']);
 Route::get('/admin/reject-application', [MissionApplicationController::class, 'rejectApplication']);

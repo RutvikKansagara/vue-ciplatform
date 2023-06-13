@@ -20,6 +20,7 @@
               name="avatar"
               :id="'avatar' + avatarOption.value"
               v-model="avatar"
+              :checked="avatarOption.value === avatar"
             />
             <label class="form-check-label" :for="'avatar' + avatarOption.value">
               <img
@@ -258,7 +259,7 @@
         countries: [],
         cityDropdowns: [],
         errors: {},
-        successMessage:''
+        successMessage:'',
       };
     },
     methods: {
@@ -296,6 +297,21 @@
         //       // Handle other types of errors
         //     }
         //   });
+        axios
+        .put(`/api/admin/user/${this.$route.params.id}`,formData)
+        .then((response) => {
+            console.log(this.formData);
+          console.log(response.data.message);
+          this.successMessage = response.data.message;
+        })
+        .catch((error) => {
+          // Handle error
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors;
+          } else {
+            // Handle other types of errors
+          }
+        });
 
 
 
@@ -342,14 +358,16 @@
           this.lastName = response.data.last_name;
           this.email = response.data.email;
           this.phoneNumber = response.data.phone_number;
-          this.password = response.data.password;
+
           this.employeeId = response.data.employee_id;
           this.department = response.data.department;
           this.status = response.data.status;
           this.profileText = response.data.profile_text;
           this.selectedCountryId = response.data.country_id;
           this.selectedCityId = response.data.city_id;
-console.log(this.selectedCityId);
+          this.avatar = response.data.avatar;
+
+          //console.log(this.avatarOptions.value);
 
           //console.log(this.formData);
         })
