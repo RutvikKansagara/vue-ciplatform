@@ -96,7 +96,7 @@ const router = createRouter({
         { path: '/policies', component: PrivacyPolicy },
         { path: '/admin/user', component: AdminUserForm },
         {path:'/admin/user/create',component:AdminUserCreate },
-        {path:'/admin/user/edit',component:AdminUserEdit},
+        {path:'/admin/user/:id/edit',component:AdminUserEdit},
         {path:'/admin/mission-application',component:MissionApplicationIndex},
         {path:'/admin/story',component:AdminStoryIndex},
         {path:'/admin/story/:id/show',component:AdminShowStory},

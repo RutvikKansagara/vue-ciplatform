@@ -142,48 +142,7 @@
           <div class="text-danger" v-if="errors.profile_text">{{ errors.profile_text[0] }}</div>
         </div>
       </div>
-      <!-- <div class="form-row justify-content-start">
-      <div class="col-md-5">
-        <label for="country">Country</label>
-      <select
-        name="country_id"
-        class="form-control"
-        id="country-dropdown"
-        v-model="selectedCountryId"
-        @change="fetchCities"
-      >
-         <option value="" disabled selected>Select Country</option>
-        <option
-          v-for="country in countries"
-          :value="country.country_id"
-          :selected="country.country_id === selectedCountryId"
-          :key="country.country_id"
-        >
-          {{ country.name }}
-        </option>
-      </select>
-</div>
-      <div class="col-md-5">
-        <label for="city">City</label>
-        <select
-          class="form-control"
-          name="city_id"
-          id="city-dropdown"
-          v-model="selectedCityId"
-        >
-          <option v-if="!selectedCityId" value="" disabled>Select City</option>
-          <option
-            v-for="city in cities"
-            :value="city.city_id"
-            :selected="city.city_id === selectedCityId"
-            :key="city.city_id"
-          >
-            {{ city.name }}
-          </option>
-        </select>
-        <div class="text-danger">{{ errors.city_id }}</div>
-      </div>
-    </div>-->
+
       <div>
         <div class="form-row justify-content-start">
           <div class="col-md-5">
@@ -296,7 +255,7 @@ export default {
       selectedCountryId: null,
       selectedCityId: null,
 
-      countries: [],    
+      countries: [],
       cityDropdowns: [],
       errors: {},
       successMessage:''

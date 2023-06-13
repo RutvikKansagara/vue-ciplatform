@@ -142,48 +142,7 @@
             <div class="text-danger" v-if="errors.profile_text">{{ errors.profile_text[0] }}</div>
           </div>
         </div>
-        <!-- <div class="form-row justify-content-start">
-        <div class="col-md-5">
-          <label for="country">Country</label>
-        <select
-          name="country_id"
-          class="form-control"
-          id="country-dropdown"
-          v-model="selectedCountryId"
-          @change="fetchCities"
-        >
-           <option value="" disabled selected>Select Country</option>
-          <option
-            v-for="country in countries"
-            :value="country.country_id"
-            :selected="country.country_id === selectedCountryId"
-            :key="country.country_id"
-          >
-            {{ country.name }}
-          </option>
-        </select>
-  </div>
-        <div class="col-md-5">
-          <label for="city">City</label>
-          <select
-            class="form-control"
-            name="city_id"
-            id="city-dropdown"
-            v-model="selectedCityId"
-          >
-            <option v-if="!selectedCityId" value="" disabled>Select City</option>
-            <option
-              v-for="city in cities"
-              :value="city.city_id"
-              :selected="city.city_id === selectedCityId"
-              :key="city.city_id"
-            >
-              {{ city.name }}
-            </option>
-          </select>
-          <div class="text-danger">{{ errors.city_id }}</div>
-        </div>
-      </div>-->
+
         <div>
           <div class="form-row justify-content-start">
             <div class="col-md-5">
@@ -324,19 +283,22 @@
           country_id: this.selectedCountryId,
           city_id: this.selectedCityId,
         };
-        axios
-          .post("/api/admin/user", formData)
-          .then((response) => {
-              this.successMessage = response.data.message;
-              console.log(response.data.message);
-          })
-          .catch((error) => {
-            if (error.response.status === 422) {
-              this.errors = error.response.data.errors;
-            } else {
-              // Handle other types of errors
-            }
-          });
+        // axios
+        //   .post("/api/admin/user", formData)
+        //   .then((response) => {
+        //       this.successMessage = response.data.message;
+        //       console.log(response.data.message);
+        //   })
+        //   .catch((error) => {
+        //     if (error.response.status === 422) {
+        //       this.errors = error.response.data.errors;
+        //     } else {
+        //       // Handle other types of errors
+        //     }
+        //   });
+
+
+
       },
       fetchCities(countryId) {
         axios
@@ -373,7 +335,28 @@
           // Handle error
         });
 
-      
+        axios
+        .get(`/api/admin/user/${this.$route.params.id}`)
+        .then((response) => {
+          this.firstName = response.data.first_name;
+          this.lastName = response.data.last_name;
+          this.email = response.data.email;
+          this.phoneNumber = response.data.phone_number;
+          this.password = response.data.password;
+          this.employeeId = response.data.employee_id;
+          this.department = response.data.department;
+          this.status = response.data.status;
+          this.profileText = response.data.profile_text;
+          this.selectedCountryId = response.data.country_id;
+          this.selectedCityId = response.data.city_id;
+console.log(this.selectedCityId);
+
+          //console.log(this.formData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       if (this.selectedCountryId) {
         this.fetchCities(this.selectedCountryId);
       }

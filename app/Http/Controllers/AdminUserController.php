@@ -14,14 +14,19 @@ class AdminUserController extends Controller
 
         return response()->json($users);
     }
+    public function show(User $user)
+    {
 
+
+        return response()->json($user);
+    }
     public function store(StoreUserRequest $request)
     {
 
-$data = $request->all();
-$data['password'] = bcrypt($request->input('password'));
-//dd($data);
-User::create($data);
+        $data = $request->all();
+        $data['password'] = bcrypt($request->input('password'));
+        //dd($data);
+        User::create($data);
 
         return response()->json(['message' => 'New User has been created'], 200);
     }

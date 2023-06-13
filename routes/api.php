@@ -49,6 +49,7 @@ Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy']);
 Route::get('/fetch-countries', [CountryCityController::class, 'fetchCountries']);
 Route::post('/fetch-city', [CountryCityController::class, 'fetchCities']);
 Route::post('/admin/user', [AdminUserController::class, 'store']);
+Route::get('admin/user/{user}',[AdminUserController::class,'show']);
 
 Route::get('/admin/mission-applications', [MissionApplicationController::class, 'getMissionApplications']);
 Route::get('/admin/approve-application', [MissionApplicationController::class, 'approveApplication']);
