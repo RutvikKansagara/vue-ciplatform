@@ -4,7 +4,7 @@
         <span class="nav-link active fs-1"> User </span>
       </ul>
       <div v-if="successMessage" class="alert alert-success mt-3">
-          {{ successMessage }}f
+          {{ successMessage }}
         </div>
       <form @submit.prevent="submitForm">
         <div class="form-row py-4">
