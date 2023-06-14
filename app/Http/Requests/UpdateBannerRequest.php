@@ -22,17 +22,27 @@ class UpdateBannerRequest extends FormRequest
      */
     public function rules(): array
     {
-        dd($this->all());
-        dd(1234);
+         dd($this->all());
+        // dd(1234);
+        // $bannerId = $this->route('banner') ? $this->route('banner') : null;
+
+        // return [
+        //     'text' => 'required',
+        //     'sort_order' => 'required','integer','gt:0',
+        //                     Rule::unique('banners')->where(function($query){
+        //                         $query->where('deleted_at','!=',Null);
+        //                     })->ignore($bannerId),
+        //     'image' =>'required',
+        // ];
+
         $bannerId = $this->route('banner') ? $this->route('banner') : null;
 
-        return [
-            'text' => 'required',
-            'sort_order' => 'required','integer','gt:0',
-                            Rule::unique('banners')->where(function($query){
-                                $query->where('deleted_at','!=',Null);
-                            })->ignore($bannerId),
-            'image' =>'required',
-        ];
+    return [
+        'text' => 'required',
+        'sort_order' => ['required', 'integer', 'gt:0', Rule::unique('banners')->where(function($query) {
+            $query->where('deleted_at', '!=', null);
+        })->ignore($bannerId)],
+        'image' => 'required',
+    ];
     }
 }

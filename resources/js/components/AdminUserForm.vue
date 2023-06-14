@@ -31,7 +31,7 @@
             <td>
               <div class="d-flex justify-content-end">
                 <a
-                  :href="`{{ route('user.edit', '') }}/${user.user_id}`"
+                  :href="`user/${user.user_id}/edit`"
                   aria-label="edit"
                   class="btn btn-white"
                 >

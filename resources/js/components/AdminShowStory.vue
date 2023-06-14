@@ -69,7 +69,7 @@
             style="width:115px;height:115px;padding-right:10px;"
           />
 
-          
+
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@ export default {
       editorConfig: {
         // The configuration of the editor.
       },
-      isEditorDisabled: true,
+      isEditorDisabled: false,
     };
   },
   computed: {

@@ -31,9 +31,14 @@
         </div>
 
         <!-- Error handling for avatar field -->
-        <div class="text-danger" v-if="errors.avatar">
+        <!-- <div class="text-danger" v-if="errors.avatar">
           {{ errors.avatar[0] }}
-        </div>
+        </div> -->
+        <div v-if="errors.avatar">
+            <div v-for="(error, index) in errors.avatar" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
       </div>
 
       <!-- First Name field -->
@@ -46,7 +51,11 @@
             class="form-control"
             v-model="firstName"
           />
-          <div class="text-danger" v-if="errors.first_name">{{ errors.first_name[0] }}</div>
+          <div v-if="errors.first_name">
+            <div v-for="(error, index) in errors.first_name" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <label for="last_name">Last Name</label>
@@ -56,7 +65,11 @@
             class="form-control"
             v-model="lastName"
           />
-          <div class="text-danger" v-if="errors.last_name">{{ errors.last_name[0] }}</div>
+          <div v-if="errors.last_name">
+            <div v-for="(error, index) in errors.last_name" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -70,7 +83,11 @@
             class="form-control"
             v-model="email"
           />
-          <div class="text-danger" v-if="errors.email">{{ errors.email[0] }}</div>
+          <div v-if="errors.email">
+            <div v-for="(error, index) in errors.email" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <label for="phone_number">Phone Number</label>
@@ -80,7 +97,11 @@
             class="form-control"
             v-model="phoneNumber"
           />
-          <div class="text-danger" v-if="errors.phone_number">{{ errors.phone_number[0] }}</div>
+          <div v-if="errors.phone_number">
+            <div v-for="(error, index) in errors.phone_number" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -94,7 +115,11 @@
             class="form-control"
             v-model="password"
           />
-          <div class="text-danger" v-if="errors.password">{{ errors.password[0] }}</div>
+          <div v-if="errors.password">
+            <div v-for="(error, index) in errors.passwrod" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <label for="confirm_password">Confirm password</label>
@@ -104,7 +129,11 @@
             class="form-control"
             v-model="confirmPassword"
           />
-          <div class="text-danger" v-if="errors.confirm_password">{{ errors.confirm_password[0] }}</div>
+          <div v-if="errors.confirm_password">
+            <div v-for="(error, index) in errors.confirm_password" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -118,7 +147,11 @@
             class="form-control"
             v-model="employeeId"
           />
-          <div class="text-danger" v-if="errors.employee_id">{{ errors.employee_id[0] }}</div>
+          <div v-if="errors.employee_id">
+            <div v-for="(error, index) in errors.employee_id" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <label for="department">Department</label>
@@ -128,7 +161,11 @@
             class="form-control"
             v-model="department"
           />
-          <div class="text-danger" v-if="errors.department">{{ errors.department[0] }}</div>
+          <div v-if="errors.department">
+            <div v-for="(error, index) in errors.department" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-row">
@@ -139,7 +176,11 @@
             id="profile_text"
             v-model="profileText"
           ></textarea>
-          <div class="text-danger" v-if="errors.profile_text">{{ errors.profile_text[0] }}</div>
+          <div v-if="errors.profile_text">
+            <div v-for="(error, index) in errors.profile_text" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -185,7 +226,11 @@
                 {{ city.name }}
               </option>
             </select>
-            <div class="text-danger" v-if="errors.city_id">{{ errors.city_id[0] }}</div>
+            <div v-if="errors.city_id">
+                <div v-for="(error, index) in errors.city_id" :key="index" class="text-danger">
+                  {{ error }}
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -197,7 +242,11 @@
             <option value="admin">Admin</option>
             <option value="user">User</option>
           </select>
-          <div class="text-danger" v-if="errors.role">{{ errors.role[0] }}</div>
+          <div v-if="errors.role">
+            <div v-for="(error, index) in errors.role" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <label for="status">Status</label>
@@ -205,7 +254,11 @@
             <option value="1">Active</option>
             <option value="0">Inactive</option>
           </select>
-          <div class="text-danger" v-if="errors.status">{{ errors.status[0] }}</div>
+          <div v-if="errors.status">
+            <div v-for="(error, index) in errors.status" :key="index" class="text-danger">
+              {{ error }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -215,7 +268,7 @@
       <a
         aria-label="cancel"
         class="btn mx-4 btn-secondary"
-        href="{{ route('user.index') }}"
+        href="/admin/user"
         >Cancel</a
       >
     </form>

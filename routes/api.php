@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CountryCityController;
 use App\Http\Controllers\MissionApplicationController;
 use App\Http\Controllers\AdminStoryController;
+use App\Http\Controllers\MissionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -60,3 +61,5 @@ Route::get('/admin/stories/{id}', [AdminStoryController::class, 'show'])->name('
 Route::post('/admin/stories/{id}/publish', [AdminStoryController::class, 'publish'])->name('stories.publish');
 Route::post('/admin/stories/{id}/decline', [AdminStoryController::class, 'decline'])->name('stories.decline');
 Route::delete('/admin/stories/{id}', [AdminStoryController::class, 'destroy'])->name('stories.destroy');
+
+Route::resource('/admin/mission' , MissionController::class);

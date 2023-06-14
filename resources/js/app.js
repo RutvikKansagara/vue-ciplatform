@@ -67,6 +67,8 @@ import AdminUserEdit from './components/AdminUserEdit.vue';
 import MissionApplicationIndex from './components/MissionApplicationIndex.vue';
 import AdminStoryIndex from './components/AdminStoryIndex.vue';
 import AdminShowStory from './components/AdminShowStory.vue';
+import BannerEditForm from './components/BannerEditForm.vue';
+import MissionIndex from './components/MissionIndex.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -100,6 +102,7 @@ const router = createRouter({
         {path:'/admin/mission-application',component:MissionApplicationIndex},
         {path:'/admin/story',component:AdminStoryIndex},
         {path:'/admin/story/:id/show',component:AdminShowStory},
+        {path:'/admin/mission',component:MissionIndex},
     ]
 });
 const app = createApp(App);

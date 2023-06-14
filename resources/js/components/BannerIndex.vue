@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ms-5 me-5 mt-5">
         <table class="table">
             <thead>
               <tr>
@@ -13,7 +13,11 @@
             <tbody>
                 <tr v-for="banner in banners" :key="banner.banner_id">
                     <td>{{ banner.banner_id }}</td>
-                    <td>{{ banner.image }}</td>
+                    <td><img
+                        :src="`../../../storage/${banner.image}`"
+                        alt=""
+                        style="width:115px;height:115px;padding-right:10px;"
+                      /></td>
                     <td>{{ banner.text }}</td>
                     <td>{{ banner.sort_order }}</td>
                     <td>
