@@ -69,6 +69,9 @@ import AdminStoryIndex from './components/AdminStoryIndex.vue';
 import AdminShowStory from './components/AdminShowStory.vue';
 import BannerEditForm from './components/BannerEditForm.vue';
 import MissionIndex from './components/MissionIndex.vue';
+import MissionCreateForm from './components/MissionCreateForm.vue';
+import MissionEditForm from './components/MissionEditForm.vue';
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -81,7 +84,7 @@ const router = createRouter({
         { path: '/cmspage/:id/edit', component: CmsForm },
         { path: '/banner', component: BannerIndex },
         { path: '/banner/create', component: BannerForm },
-        { path: '/banner/:id/edit', component: BannerForm },
+        { path: '/banner/:id/edit', component: BannerEditForm },
         { path: '/missionskill', component: MissionSkillIndex },
         { path: '/missionskill/create', component: MissionSkillForm },
         { path: '/missionskill/:id/edit', component: MissionSkillForm },
@@ -103,6 +106,9 @@ const router = createRouter({
         {path:'/admin/story',component:AdminStoryIndex},
         {path:'/admin/story/:id/show',component:AdminShowStory},
         {path:'/admin/mission',component:MissionIndex},
+        {path:'/admin/mission/create',component:MissionCreateForm},
+        {path:'/admin/mission/:id/edit',component:MissionEditForm},
+
     ]
 });
 const app = createApp(App);

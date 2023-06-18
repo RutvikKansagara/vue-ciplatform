@@ -18,7 +18,7 @@
                         alt=""
                         style="width:115px;height:115px;padding-right:10px;"
                       /></td>
-                    <td>{{ banner.text }}</td>
+                    <td v-html="banner.text"></td>
                     <td>{{ banner.sort_order }}</td>
                     <td>
                       <div class="row gap-3">

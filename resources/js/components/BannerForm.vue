@@ -8,12 +8,14 @@
     <form @submit.prevent="submitForm" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="description" class="form-label">Banner Description:</label>
-        <textarea
+        <!-- <textarea
           class="form-control"
           type="text"
           id="name"
           v-model="banner.text"
-        ></textarea>
+        ></textarea> -->
+        <ckeditor :editor="editor" v-model="banner.text" :config="editorConfig"
+                        :disabled="isEditorDisabled"></ckeditor>
         <div v-if="errors.text">
           <div
             v-for="(error, index) in errors.text"
@@ -79,13 +81,26 @@
 
 <script>
 import axios from "axios";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import CKEditor from "@ckeditor/ckeditor5-vue";
 export default {
+    components: {
+        // Use the <ckeditor> component in this view.
+        ckeditor: CKEditor.component,
+    },
   data() {
     return {
+        editor: ClassicEditor,
+
+            editorConfig: {
+                // The configuration of the editor.
+            },
+            isEditorDisabled: false,
       banner: {
-        text: "",
+        
         sort_order: 0,
         image: "",
+        text: "<p>Content of the editor.</p>",
       },
       errors: {},
       successMessage: "",

@@ -38,7 +38,13 @@ class CmsPageController extends Controller
     {
         // $request->validated();
 
-        return CmsPage::create($request->post());
+        $cmsPage = CmsPage::create($request->post());
+
+    if ($cmsPage) {
+        return response()->json(['message' => 'CmsPage created successfully'], 201);
+    } else {
+        return response()->json(['message' => 'Failed to create CmsPage'], 500);
+    }
 
 
     }
@@ -69,7 +75,7 @@ class CmsPageController extends Controller
 
         $cmspage->update($request->all());
 
-        return $cmspage;
+        return response()->json(['cmspage' => $cmspage,'message' => 'cmspage updated successfully']);
     }
 
     /**

@@ -36,7 +36,13 @@ class MissionThemeController extends Controller
      */
     public function store(StoreMissionThemeRequest $request)
     {
-        return MissionTheme::create($request->all());
+        $missiontheme = MissionTheme::create($request->all());
+
+        if ($missiontheme) {
+            return response()->json(['message' => 'mission theme created successfully'], 201);
+        } else {
+            return response()->json(['message' => 'Failed to create mision theme'], 500);
+        }
         //dd(MissionTheme::all());
     }
 
@@ -66,7 +72,7 @@ class MissionThemeController extends Controller
 
         $missiontheme->update($request->all());
 
-        return $missiontheme;
+        return response()->json(['missiontheme' => $missiontheme,'message' => 'mission theme updated successfully']);
     }
 
     /**
@@ -77,4 +83,12 @@ class MissionThemeController extends Controller
         $missiontheme->delete();
         return response()->json(['message' => 'Product deleted successfully']);
     }
+
+    public function fetchMissionThemes(){
+
+        $missionthemes = MissionTheme::all();
+        return response()->json(['missionthemes'=> $missionthemes]);
+    }
+
 }
+

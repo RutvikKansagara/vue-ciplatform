@@ -1,7 +1,10 @@
 <template>
     <div class="container-fluid mt-4 px-4">
       <ul class="nav border-bottom"><span class="nav-link active fs-1"> Mission </span></ul>
+      <div class="ms-5 me-5 mt-5 mb-5 w-25 rounded">
 
+        <router-link :to="`/admin/mission/create`" class="p-2 col border btn btn-success">
+            <i class="fas fa-plus me-2"></i>Add</router-link></div>
       <table class="table table-responsive border-start border-end">
         <thead class="table-light">
           <tr>
@@ -19,9 +22,11 @@
             <td>{{ formatDate(mission.start_date) }}</td>
             <td>{{ formatDate(mission.end_date) }}</td>
             <td class="d-flex">
-              <a class="btn btn-white" :href="editMissionUrl(mission.id)">
+              <router-link class="btn btn-white" :to="`/admin/mission/1/edit`">
                 <i class="far fa-edit" style="color:orange;"></i>
-              </a>
+              </router-link>
+
+
               <button type="button" @click="showDeleteMission(mission.mission_id)" class="btn btn-white">
                 <img src="../../../public/Images/bin.png" style="width: 16px;height:20px" alt="delete">
               </button>
@@ -44,11 +49,16 @@
     },
     methods: {
       formatDate(date) {
-        return new Date(date).toLocaleDateString('en-US', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        });
+        const options = {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      };
+
+      const formattedDate = new Date(date).toLocaleDateString('en-US', options);
+      const [month, day, year] = formattedDate.split('/');
+
+      return `${day}-${month}-${year.slice(-2)}`;
       },
       fetchMissions() {
         // Make an API call to fetch the missions data from Laravel backend
@@ -60,15 +70,13 @@
             console.error(error);
           });
       },
-      editMissionUrl(missionId) {
-        // Generate the edit mission URL using Laravel's route function
-        // return route(`/admin/mission/{$this.$route.parms.id}`);
-      },
+
       async showDeleteMission(missionId) {
         // Handle delete modal logic
         try {
         await axios.delete(`/api/admin/mission/${missionId}`);
         this.missions = this.missions.filter(mission => mission.mission_id !== missionId);
+
       } catch (error) {
         console.error(error);
       }

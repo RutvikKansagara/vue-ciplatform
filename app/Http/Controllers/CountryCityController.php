@@ -6,14 +6,14 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\City;
 use Illuminate\Http\Request;
-
+use App\Models\MissionTheme;
 class CountryCityController extends Controller
 {
      public function fetchCountries()
     {
         $countries = Country::all();
-
-        return response()->json(['countries' => $countries]);
+        $missionthemes = MissionTheme::all();
+        return response()->json(['countries' => $countries,'missionthemes' => $missionthemes]);
     }
 
     public function fetchCities(Request $request)

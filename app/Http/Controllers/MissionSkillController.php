@@ -54,8 +54,14 @@ class MissionSkillController extends Controller
     public function store(StoreSkillRequest $request)
     {
         //dd($request->toArray());
-        return Skill::create($request->all());
+        $skill = Skill::create($request->all());
         //dd(Skill::all());
+
+        if ($skill) {
+            return response()->json(['message' => 'skill created successfully'], 201);
+        } else {
+            return response()->json(['message' => 'Failed to create skill'], 500);
+        }
 
     }
 
@@ -84,7 +90,7 @@ class MissionSkillController extends Controller
         //dd($request->toArray());
         $missionskill->update($request->all());
 
-        return $missionskill;
+        return response()->json(['missionskill' => $missionskill,'message' => 'skill updated successfully']);
     }
 
     /**
@@ -95,5 +101,12 @@ class MissionSkillController extends Controller
         $missionskill->delete();
 
         return response()->json(['message' => 'Product deleted successfully']);
+    }
+
+    public function fetchMissionSkills(){
+
+        $missionskills = Skill::all();
+
+        return response()->json(['missionskills'=> $missionskills]);
     }
 }

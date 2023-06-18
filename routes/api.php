@@ -63,3 +63,5 @@ Route::post('/admin/stories/{id}/decline', [AdminStoryController::class, 'declin
 Route::delete('/admin/stories/{id}', [AdminStoryController::class, 'destroy'])->name('stories.destroy');
 
 Route::resource('/admin/mission' , MissionController::class);
+Route::get('/fetch-themes',[MissionThemeController::class,'fetchMissionThemes']);
+Route::get('/fetch-skills',[MissionSkillController::class,'fetchMissionSkills']);

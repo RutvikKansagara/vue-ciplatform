@@ -51,7 +51,7 @@ class BannerController extends Controller
      */
     public function show(Banner $banner)
     {
-        return $banner;
+        return response()->json($banner);
     }
 
     /**
@@ -66,7 +66,7 @@ class BannerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBannerRequest $request,$id)
+    public function update(UpdateBannerRequest $request,string $id)
     {
         $banner=Banner::find($id);
         $banner->text = $request->text;

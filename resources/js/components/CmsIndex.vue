@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div class="ms-5 me-5 mt-5">
+        <div class="ms-5 me-5 mt-5 mb-5 w-25 rounded">
+
+        <router-link :to="`/cmspage/create`" class="p-2 col border btn btn-success">
+            <i class="fas fa-plus me-2"></i>Add</router-link></div>
         <table class="table">
             <thead>
               <tr>
@@ -15,7 +19,7 @@
                 <tr v-for="cmspage in cmspages" :key="cmspage.cms_page_id">
                     <td>{{ cmspage.cms_page_id }}</td>
                     <td>{{ cmspage.title }}</td>
-                    <td>{{ cmspage.text }}</td>
+                    <td v-html="cmspage.text"></td>
                     <td>{{ cmspage.slug }}</td>
                     <td>{{ getStatusLabel(cmspage.status)  }}</td>
                     <td>

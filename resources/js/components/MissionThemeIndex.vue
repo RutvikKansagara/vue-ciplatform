@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div class="ms-5 me-5 mt-5">
+        <div class="ms-5 me-5 mt-5 mb-5 w-25 rounded">
+
+            <router-link :to="`/missiontheme/create`" class="p-2 col border btn btn-success">
+                <i class="fas fa-plus me-2"></i>Add</router-link></div>
         <table class="table">
             <thead>
               <tr>
@@ -46,7 +50,7 @@ export default {
   },
   methods: {
     getStatusLabel(status) {
-    return status === '1' ? 'Active' : 'Inactive';
+    return status == '1' ? 'Active' : 'Inactive';
   },
     async deleteMissionTheme(mission_theme_id) {
       try {

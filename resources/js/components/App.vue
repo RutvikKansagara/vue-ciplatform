@@ -89,10 +89,10 @@ export default {
         </div>
         <div class="sidebar">
             <div class="profile">
-                <img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg"
+                <img src="../../../public/Images/volunteer1.png"
                     alt="profile_picture">
-                <h3>Anamika Roy</h3>
-                <p>Designer</p>
+                <h3>Rutvik Kansagara</h3>
+                <!-- <p>Designer</p> -->
             </div>
             <ul>
                 <li>
@@ -120,7 +120,7 @@ export default {
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="`/cmspage`">
+                    <router-link :to="`/admin/mission`">
                         <span class="icon"><i class="fas fa-database"></i></span>
                         <span class="item">Mission</span>
                     </router-link>
