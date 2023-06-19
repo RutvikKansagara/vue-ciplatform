@@ -469,14 +469,27 @@ export default {
           const user = response.data.user;
           console.log(response);
           console.log(response.data);
-
+          this.firstName = response.data.user.first_name;
+          this.lastName = response.data.user.last_name;
+          this.employeeId = response.data.user.employee_id;
+          this.title = response.data.user.title;
+          this.department = response.data.user.department;
+          this.profile_text = response.data.user.profile_text;
+          this.why_i_volunteer = response.data.user.why_i_volunteer;
+          this.selectedCountryId = response.data.user.country_id;
+          //this.availability = response.data.user.availability;
+          this.linked_in_url = response.data.user.linked_in_url;
+        //   this. = response.data.
+        //   this. = response.data.
+        //   this. = response.data.
+        //   this. = response.data.
           // Use the user data in your Vue component as needed
         })
         .catch(error => {
           if (error.response && error.response.status === 401) {
             // Unauthorized, redirect to login page
 
-             //window.location.href = '/user/login';
+             window.location.href = '/user/login';
             // router.push('/user/login');
             // this.$router.push('/user/login');
           } else {
@@ -490,6 +503,7 @@ export default {
     const countriesResponse = await axios.get("/api/fetch-countries");
     this.countries = countriesResponse.data.countries;
     //console.log(this.countries);
+
 
     // Fetch cities on component mount if a country is already selected
     if (this.selectedCountryId) {

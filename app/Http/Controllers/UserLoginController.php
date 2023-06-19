@@ -32,29 +32,20 @@ class UserLoginController extends Controller
         // Attempt to authenticate the user
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            // $token = $user->createToken('MyApp')->plainTextToken;
-            $userId =$user->user_id;
+            $token = $user->createToken('createToken')->plainTextToken;
+            $userId = $user->user_id;
             return response()->json([
-                'message' => 'Login successful','userId' => $userId
-
+                'message' => 'Login successful', 'userId' => $userId, 'token' => $token,
             ]);
         } else {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
     }
-    public function logout(){
-        if (Auth::check()) {
-            $user_id = Auth::user()->user_id;
-            dd($user_id);
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
 
-            // Perform logout actions
-            // Session::flush();
-        } else {
-             dd('User is not authenticated');
-
-        }
-
-
+        return response()->json(['message' => 'Logout successful']);
     }
     public function register(RegisterRequest $request)
     {

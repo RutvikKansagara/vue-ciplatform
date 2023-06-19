@@ -12,7 +12,7 @@ class UserEditProfileController extends Controller
 
 
         $user = User::find($user_id);
-        dd(Auth::user()->user_id);
+        //dd(Auth::user()->user_id);
         if (!$user || $user->user_id != auth()->user()->user_id) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
