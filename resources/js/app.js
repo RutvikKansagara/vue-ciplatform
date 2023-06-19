@@ -71,7 +71,7 @@ import BannerEditForm from './components/BannerEditForm.vue';
 import MissionIndex from './components/MissionIndex.vue';
 import MissionCreateForm from './components/MissionCreateForm.vue';
 import MissionEditForm from './components/MissionEditForm.vue';
-
+import UserEditProfile from './components/UserEditProfile.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -108,6 +108,7 @@ const router = createRouter({
         {path:'/admin/mission',component:MissionIndex},
         {path:'/admin/mission/create',component:MissionCreateForm},
         {path:'/admin/mission/:id/edit',component:MissionEditForm},
+        {path:'/user/edit-profile/:id',component:UserEditProfile},
 
     ]
 });

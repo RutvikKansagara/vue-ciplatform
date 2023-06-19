@@ -63,7 +63,9 @@
             // Handle success response
             this.email = '';
             this.password = '';
-            this.successMessage = response.data.message;
+            const userId = response.data.userId;
+this.$router.push(`/user/edit-profile/${userId}`);
+
           })
           .catch(error => {
             // Handle error response

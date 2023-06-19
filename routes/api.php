@@ -16,6 +16,8 @@ use App\Http\Controllers\CountryCityController;
 use App\Http\Controllers\MissionApplicationController;
 use App\Http\Controllers\AdminStoryController;
 use App\Http\Controllers\MissionController;
+use App\Http\Controllers\UserEditProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,6 +42,7 @@ Route::post('/user/login', [UserLoginController::class, 'login']);
 Route::post('/user/register', [UserLoginController::class, 'register']);
 Route::post('/user/check-email', [UserLoginController::class, 'resetPassword']);
 Route::post('/user/reset-password', [UserLoginController::class, 'passwordResetting']);
+Route::get('logout', [UserLoginController::class, 'logout']);
 Route::post('/admin/check-email', [AdminLoginController::class, 'resetPassword']);
 Route::post('/admin/reset-password', [AdminLoginController::class, 'passwordResetting']);
 Route::get('policies',[PolicyPageController::class,'index']);
@@ -65,3 +68,6 @@ Route::delete('/admin/stories/{id}', [AdminStoryController::class, 'destroy'])->
 Route::resource('/admin/mission' , MissionController::class);
 Route::get('/fetch-themes',[MissionThemeController::class,'fetchMissionThemes']);
 Route::get('/fetch-skills',[MissionSkillController::class,'fetchMissionSkills']);
+
+
+Route::get('/edit-profile/{user_id}',[UserEditProfileController::class,'editProfile']);

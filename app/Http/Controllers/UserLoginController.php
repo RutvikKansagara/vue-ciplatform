@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Session;
 
 class UserLoginController extends Controller
 {
@@ -32,16 +33,29 @@ class UserLoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             // $token = $user->createToken('MyApp')->plainTextToken;
-
+            $userId =$user->user_id;
             return response()->json([
-                'message' => 'Login successful',
+                'message' => 'Login successful','userId' => $userId
 
             ]);
         } else {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
     }
+    public function logout(){
+        if (Auth::check()) {
+            $user_id = Auth::user()->user_id;
+            dd($user_id);
 
+            // Perform logout actions
+            // Session::flush();
+        } else {
+             dd('User is not authenticated');
+
+        }
+
+
+    }
     public function register(RegisterRequest $request)
     {
         if (User::where('email', $request->email)->count() === 0) {
