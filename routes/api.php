@@ -71,3 +71,5 @@ Route::get('/fetch-skills',[MissionSkillController::class,'fetchMissionSkills'])
 
 
 Route::get('/edit-profile/{user_id}',[UserEditProfileController::class,'editProfile']);
+Route::put('update-profile', [UserEditProfileController::class,'updateProfile'])->name('update-profile');
+Route::post('/users/update-password', [UserEditProfileController::class, 'updatePassword'])->name('users.update-password');

@@ -16,6 +16,9 @@
     </button>
   </div>
   <form @submit.prevent="updateProfile" enctype="multipart/form-data">
+    <div v-if="successMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+    </div>
     <div class="container mx-auto">
       <div class="row ms-md-5">
         <div
@@ -33,14 +36,65 @@
           <input type="file" id="avatar" style="display: none" />
           <h5 class="mt-2">{{ fullName }}</h5>
 
-          <button
-            type="button"
-            data-toggle="modal"
-            data-target="#passwordModal"
-            class="btn btn-warning"
-          >
-            Change Password
-          </button>
+          <button type="button" @click="openPasswordModal" class="btn btn-warning">Change Password</button>
+
+
+
+
+
+          <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="container">
+                  <div class="d-flex justify-content-between">
+                    <div class="mt-4 text-start">
+                      <h6>Change Password</h6>
+                    </div>
+                    <button type="button" class="close mt-3" data-dismiss="modal" aria-label="Close" style="border:none;background:none">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <form @submit.prevent="submitPasswordForm">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-12 mt-4">
+                          <input type="password" class="form-control" v-model="oldPassword" placeholder="Enter Old Password">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-12 mt-4">
+                          <input type="password" class="form-control" v-model="newPassword" placeholder="Enter new Password">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-12 mt-4">
+                          <input type="password" class="form-control" v-model="confirmPassword" placeholder="Enter confirm Password">
+                        </div>
+                      </div>
+                    </div>
+                    <div id="password-error" class="alert alert-danger" role="alert" v-if="passwordError">{{ passwordError }}</div>
+                  </div>
+                  <div class="container">
+                    <div class="d-flex mt-3 justify-content-end">
+                      <button type="button" class="btn px-4 btn-outline-secondary" style="border-radius:18px" data-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn px-4 btn-outline-warning" style="border-radius:18px">Change Password</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
         </div>
 
         <div class="col-lg-8 ms-md-5 ps-md-5">
@@ -406,6 +460,11 @@ export default {
       countries: [],
       cityDropdowns: [],
       countries: [],
+      successMessage:'',
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+      passwordError: '',
     };
   },
   computed: {
@@ -421,13 +480,18 @@ export default {
   methods: {
     updateProfile() {
       const formData = new FormData();
+      formData.append('_method','PUT');
       formData.append("avatar", this.avatar);
       formData.append("first_name", this.firstName);
       formData.append("last_name", this.lastName);
       formData.append("employee_id", this.employeeId);
       formData.append("manager", this.manager);
       formData.append("title", this.title);
-
+      formData.append("country_id",this.selectedCountryId);
+      formData.append("city_id",this.selectedCityId);
+      formData.append("profile_text", this.profile_text);
+      formData.append("why_i_volunteer",this.why_i_volunteer);
+      formData.append("linked_in_url",this.linked_in_url);
       // Send the form data to the server using Axios or any other method
       // Here, you can make an API request to your Laravel backend
       // axios.post('/api/update-profile', formData)
@@ -443,12 +507,34 @@ export default {
       //       console.error(error);
       //     }
       //   });
+
+      axios
+                .post('/api/update-profile/',formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+
+                )
+                .then((response) => {
+                    this.successMessage = response.data.message;
+                    console.log(this.successMessage);
+                })
+                .catch((error) => {
+
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // Handle other types of errors
+                    }
+                    // Handle error
+                });
     },
     fetchCities(countryId) {
       axios
         .post("/api/fetch-city", {
           country_id: countryId,
-          _token: "{{ csrf_token() }}",
+        //   _token: "{{ csrf_token() }}",
         })
         .then((response) => {
           const index = this.cityDropdowns.length;
@@ -494,6 +580,38 @@ export default {
             // this.$router.push('/user/login');
           } else {
 
+            console.log(error);
+          }
+        });
+    },
+
+    openPasswordModal() {
+      $('#passwordModal').modal('show');
+    },
+    submitPasswordForm() {
+      const formData = {
+        old_password: this.oldPassword,
+        password: this.newPassword,
+        confirm_password: this.confirmPassword
+      };
+
+      axios.post('/api/users/update-password', formData)
+        .then(response => {
+          $('#passwordModal').modal('hide');
+          location.reload();
+          alert('Password has been updated successfully!');
+        })
+        .catch(error => {
+          if (error.response && error.response.data && error.response.data.errors) {
+            const errors = error.response.data.errors;
+            let errorHtml = '';
+            for (const key in errors) {
+              if (errors.hasOwnProperty(key)) {
+                errorHtml += '<p>' + errors[key] + '</p>';
+              }
+            }
+            this.passwordError = errorHtml;
+          } else {
             console.log(error);
           }
         });
